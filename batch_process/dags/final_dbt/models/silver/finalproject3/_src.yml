@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: projectcredix_group3_bronze
+    database: long-memory-400610
+    schema: projectcredix_group3_bronze
+    description: Pipeline dataset regarding personal information application credit card .
+    tables:
+      - name: raw_applicationrecord_data
+        identifier: raw_applicationrecord_data
+
+  - name: projectcredix_group3_bronze
+    database: long-memory-400610
+    schema: projectcredix_group3_bronze
+    description: Pipeline dataset regarding history application credit card .
+    tables:
+      - name: raw_credithistory_data
+        identifier: raw_credithistory_data

@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: cleansing_app
+  - name: cleansing_his
+  - name: Dim_Application
+  - name: Dim_Fact
+  - name: Dim_Record
+  - name: Dim_time
