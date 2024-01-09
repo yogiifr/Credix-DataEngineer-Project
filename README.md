@@ -154,7 +154,7 @@ sudo docker-compose up
 ```
 3. Open Airflow with username and password "airflow" to run the DAG
 ```
-localhost:9090
+localhost:8080
 ```
 ![dags](images/dags.png)
 
