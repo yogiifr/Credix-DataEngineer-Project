@@ -1,6 +1,6 @@
 with transform_dim_app as (
     SELECT 
-            ID AS Applicant_ID,
+            ID AS APPLICANT_ID,
             CODE_GENDER,
             YEARS_BIRTH,
             OCCUPATION_TYPE,
