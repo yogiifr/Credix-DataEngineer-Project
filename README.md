@@ -19,12 +19,30 @@ The analysis of "Credit Repayment Ability" aims to evaluate whether a debtor is 
 Default cases impact the bank's risk management, potentially leading to increased provisions and affecting profit due to inadequate risk management and understanding of customers.
 
 ## Dataset 📑
+![Dataset](images/dataset.png)
 Two datasets are utilized in the Credix project:
 
 1. **application_record:** Contains personal information about credit cardholders.
 2. **credit_record:** Includes historical credit data of credit cardholders.
 
 A star schema model is employed for the project, with the Fact_CreditCard table serving as the central data hub, connecting numeric and key data. The key references descriptive information available in dimension tables: Dim_Application, Dim_Time, and Dim_Record.
+
+## Data Processing ⚙️
+**Application_Record**
+1. Days_Birth -> Year_Birth
+2. Days_Employed -> Year_Employed
+3. Bagian Flag sebelumnya Y&N-> ditreat jadi 0 1 untuk boolean
+4. Bagian days employed untuk tipe data debitur yang pensiun, awalnya data memiliki value 365 ribu hari atau 1000 tahun, kami proses menjadi default 50 tahun atau sekitar 18.250 hari
+5. Untuk kolom occupation type beberapa id memiliki tipe ocupation yang null sehingga kami proses menjadi other
+**Credit_Record**
+1. Pada awalnya kolom month balance pada credit record itu memiliki value range waktu yang belum terlalu terdefinisi, pada kasus ini kami memproses dan men set default waktu dari rentang per tanggal 1 oktober 2023
+2. Untuk kolom status kami menggunakan credit skoring berdasarkan bi checking
+  Skor 0 : Tidak melakukan kredit
+  Skor 1: Kredit Lancar, artinya debitur selalu memenuhi kewajibannya untuk membayar cicilan setiap bulan beserta bunganya hingga lunas tanpa pernah menunggak. 
+  Skor 2: Kredit dalam Perhatian Khusus, artinya debitur tercatat menunggak cicilan kredit 1-90 hari 
+  Skor 3: Kredit Tidak Lancar, artinya debitur tercatat menunggak cicilan kredit 91-120 hari 
+  Skor 4: Kredit Diragukan, artinya debitur tercatat menunggak cicilan kredit 121-180 hari 
+  Skor 5: Kredit Macet, artinya debitur tercatat menunggak cicilan kredit lebih 180 hari.
 
 ## Tech Stack 💻
 The project employs various tools and technologies:
@@ -41,6 +59,7 @@ The project employs various tools and technologies:
 - [**Visualization:** Tableau](https://github.com/yogiifr/Credix-DataEngineer-Project/tree/main/dashboard)
 
 ## Data Pipeline  🛠️
+![Architecture](images/architecture.png)
 The end-to-end pipeline architecture involves the following steps:
 
 1. Local data is pulled using Airflow and Docker, stored in Google Cloud Storage (Data Lake).
