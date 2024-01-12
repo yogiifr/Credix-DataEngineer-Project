@@ -28,21 +28,22 @@ Two datasets are utilized in the Credix project:
 A star schema model is employed for the project, with the Fact_CreditCard table serving as the central data hub, connecting numeric and key data. The key references descriptive information available in dimension tables: Dim_Application, Dim_Time, and Dim_Record.
 
 ## Data Processing ⚙️
-**Application_Record**
-1. Days_Birth -> Year_Birth
-2. Days_Employed -> Year_Employed
-3. Bagian Flag sebelumnya Y&N-> ditreat jadi 0 1 untuk boolean
-4. Bagian days employed untuk tipe data debitur yang pensiun, awalnya data memiliki value 365 ribu hari atau 1000 tahun, kami proses menjadi default 50 tahun atau sekitar 18.250 hari
-5. Untuk kolom occupation type beberapa id memiliki tipe ocupation yang null sehingga kami proses menjadi other
-**Credit_Record**
-1. Pada awalnya kolom month balance pada credit record itu memiliki value range waktu yang belum terlalu terdefinisi, pada kasus ini kami memproses dan men set default waktu dari rentang per tanggal 1 oktober 2023
-2. Untuk kolom status kami menggunakan credit skoring berdasarkan bi checking
-  Skor 0 : Tidak melakukan kredit
-  Skor 1: Kredit Lancar, artinya debitur selalu memenuhi kewajibannya untuk membayar cicilan setiap bulan beserta bunganya hingga lunas tanpa pernah menunggak. 
-  Skor 2: Kredit dalam Perhatian Khusus, artinya debitur tercatat menunggak cicilan kredit 1-90 hari 
-  Skor 3: Kredit Tidak Lancar, artinya debitur tercatat menunggak cicilan kredit 91-120 hari 
-  Skor 4: Kredit Diragukan, artinya debitur tercatat menunggak cicilan kredit 121-180 hari 
-  Skor 5: Kredit Macet, artinya debitur tercatat menunggak cicilan kredit lebih 180 hari.
+**Application Record**
+1. Convert `Days_Birth` to `Year_Birth`.
+2. Convert `Days_Employed` to `Year_Employed`.
+3. Treat the `Flag` column (previously Y&N) as 0 and 1 for boolean.
+4. For the `Days_Employed` column for retired debtors, originally having a value of 365,000 days or 1,000 years, process it to a default of 50 years or approximately 18,250 days.
+5. For the `Occupation_Type` column, some IDs have null occupation types, so we process them as "other."
+
+**Credit Record**
+1. Initially, the `Month_Balance` column in the credit record has a time range that is not well-defined. In this case, we process and set the default time from October 1, 2023.
+2. For the `Status` column, we use credit scoring based on bi checking.
+   - Score 0: No credit activity.
+   - Score 1: Good Credit, meaning the debtor consistently meets obligations to pay installments and interest each month until fully paid without any delays.
+   - Score 2: Special Attention Credit, meaning the debtor is recorded to have delayed credit payments for 1-90 days.
+   - Score 3: Non-Performing Credit, meaning the debtor is recorded to have delayed credit payments for 91-120 days.
+   - Score 4: Doubtful Credit, meaning the debtor is recorded to have delayed credit payments for 121-180 days.
+   - Score 5: Defaulted Credit, meaning the debtor is recorded to have delayed credit payments for more than 180 days.
 
 ## Tech Stack 💻
 The project employs various tools and technologies:
